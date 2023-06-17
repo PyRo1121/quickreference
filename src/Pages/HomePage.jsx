@@ -216,9 +216,7 @@ const HomePage = () => {
           onModalToggle={handleModalToggle}
         />
       </div>
-      <div className="z-[-10]">
       <CollapseTable />
-      </div>
       <form onSubmit={handleSubmit} id="quickForm">
         {/* Caller Name */}
         <div class="flex flex-row space-x-2 h-11 my-2">

@@ -1,0 +1,1 @@
+- [ ] **components\dropDownMenu.jsx**: Fix menu to not derender contents of CollapseTable when dropDown is clicked
