@@ -1,11 +1,28 @@
-import { createSignal } from 'solid-js';
+import { createSignal, onCleanup } from 'solid-js';
 
 const CollapseTable = () => {
   const [isWeeklySlaOpen, setWeeklySlaOpen] = createSignal(false);
   const [isContactsOpen, setContactsOpen] = createSignal(false);
+  const [zIndex, setZIndex] = createSignal(0);
+
+  const updateZIndex = () => {
+    setZIndex(isWeeklySlaOpen() || isContactsOpen() ? 10 : 0);
+  };
+
+  isWeeklySlaOpen(() => {
+    updateZIndex();
+  });
+
+  isContactsOpen(() => {
+    updateZIndex();
+  });
+
+  onCleanup(() => {
+    setZIndex(0);
+  });
 
   return (
-    <div tabIndex={0} class="flex flex-col collapse collapse-arrow border border-base-300 bg-base-200 space-y-5 relative z-10">
+    <div tabIndex={0} class={`flex flex-col collapse collapse-arrow border border-base-300 bg-base-200 space-y-5 relative ${zIndex()}`}>
       <div class="collapse-title text-xl font-medium p-4" onClick={() => setWeeklySlaOpen(!isWeeklySlaOpen())}>
         Weekly SLA's
       </div>

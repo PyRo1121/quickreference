@@ -12,7 +12,7 @@ const DropdownMenu = () => {
   };
 
   return (
-    <div class="dropdown fixed top-0 left-0" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+    <div class="dropdown fixed top-0 left-0" style={{ zIndex: 9999, position: 'relative' }} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       <button class="btn-ghost btn-circle btn" aria-expanded={isOpen()} aria-haspopup="true">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />

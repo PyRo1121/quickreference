@@ -6,10 +6,16 @@ import DropdownMenu from './components/dropDownMenu';
 
 const App = () => {
   return (
-    <div>
-      <Time />
-      <div class="divider"></div>
-      <DropdownMenu />
+    <div class="w-95 m-2 flex flex-col">
+      <div className="flex justify-between items-center">
+        <div className="flex items-center">
+          <DropdownMenu />
+        </div>
+        <div className="flex flex-grow justify-center">
+          <Time />
+        </div>
+      </div>
+      <div className="divider"></div>        
       <Routes>
         <Route path="/" element={<HomePage />} end />
         <Route path="/results" element={<ResultsPage />} />

@@ -1,7 +1,12 @@
 {
-  "name": "vite-template-solid",
-  "version": "0.0.0",
-  "description": "",
+  "name": "quick-reference",
+  "version": "0.0.3",
+  "description": "This is a CRUD app with additional useful information and automated task to help in day to day job activities.",
+  "author": {
+    "name": "Olen Latham",
+    "email": "olen@latham.cloud",
+    "url": "https://latham.cloud"
+  },
   "scripts": {
     "start": "vite",
     "dev": "vite",
