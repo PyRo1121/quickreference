@@ -6,3 +6,5 @@ dist/
 
 # Ignore the .env file
 .env
+
+.turbo
