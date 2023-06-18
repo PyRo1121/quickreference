@@ -25,15 +25,15 @@ const Modal = ({ id, title, content, onModalToggle }) => {
 
   return (
     <>
-      <label for={id} class="h-11 px-4 py-2 border border-info rounded-md text-sm font-medium text-white hover:bg-gray-800 cursor-pointer">
+      <label for={id} class="h-11 px-4 py-2 border border-info rounded-md text-sm font-medium  hover:bg-gray-800 cursor-pointer">
         {title}
       </label>
       <input type="checkbox" id={id} class="modal-toggle" onChange={handleToggle} />
       <div class={`modal ${isOpen() ? 'open' : ''}`}>
         <div class="modal-box">
-          <h5 class="text-center select-all text-white">{title}</h5>
+          <h5 class="text-center select-all ">{title}</h5>
           <div class="divider"></div>
-          <div className="text-white">{content}</div>
+          <div class="">{content}</div>
           <div class="modal-action">
             <label for={id} class="btn">Close</label>
           </div>
@@ -57,16 +57,26 @@ const HomePage = () => {
   const [modal2Open, setModal2Open] = createSignal(false);
 
   const handleCopyNotes = async () => {
-    const notesTextarea = document.getElementById('notesTextarea');
-    if (notesTextarea) {
+    const [notes, setNotes] = createSignal(`1. Authentication Notes:\n2. Review Reward Guidelines:\n3. Applicable Disclosures Read:\n4. Complaint Number (If Applicable):\n5. Other Case Details:`);
+  
+    // Server-side rendering
+    if (typeof window === 'undefined') {
       try {
-        await navigator.clipboard.writeText(notesTextarea.value);
-        console.log('Notes copied to clipboard');
+        const { data, error } = await supabase
+          .from('clipboard')
+          .insert([{ notes: notes() }]);
+  
+        if (error) {
+          console.error('Failed to copy notes to clipboard:', error);
+        } else {
+          console.log('Notes copied to clipboard:', data);
+        }
       } catch (error) {
-        console.error('Failed to copy notes:', error);
+        console.error('Error copying notes to clipboard:', error);
       }
     }
   };
+  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -297,23 +307,23 @@ const HomePage = () => {
           Notes:
         </label>
         <div class="flex flex-row pt-2 my-2">
-          <textarea
-            class="align-left form-control w-full resize-none overflow-hidden rounded-md border border-info bg-transparent pl-2"
-            id="notesTextarea"
-            aria-label="Notes"
-            autocapitalize="on"
-            spellcheck="true"
-            name="notes"
-            rows="5"
-            value={notes()}
-            onInput={(event) => setNotes(event.target.value)}
-          ></textarea>
-        </div>
+        <textarea
+          class="align-left form-control w-full resize-none overflow-hidden rounded-md border border-info bg-transparent pl-2"
+          id="notesTextarea"
+          aria-label="Notes"
+          autocapitalize="on"
+          spellcheck="true"
+          name="notes"
+          rows="5"
+          value={notes()}
+          onInput={(event) => setNotes(event.target.value)}
+        ></textarea>
+      </div>
 
         {/* Form Buttons */}
         <div class="flex flex-row justify-center space-x-2 pt-2">
           <button
-            class="h-11 px-4 py-2 border border-info rounded-md text-sm font-medium text-white hover:bg-gray-800"
+            class="h-11 px-4 py-2 border border-info rounded-md text-sm font-medium  hover:bg-gray-800"
             type="reset"
             aria-label="Reset Notes"
             id="resetButton"
@@ -322,7 +332,7 @@ const HomePage = () => {
             Reset Notes
           </button>
           <button
-            class="h-11 px-4 py-2 border border-info rounded-md text-sm font-medium text-white hover:bg-gray-800"
+            class="h-11 px-4 py-2 border border-info rounded-md text-sm font-medium  hover:bg-gray-800"
             aria-label="Copy Notes"
             id="copyID"
             value="Copy"
@@ -332,7 +342,7 @@ const HomePage = () => {
             Copy
           </button>
           <button
-            class="h-11 px-4 py-2 border border-info rounded-md text-sm font-medium text-white hover:bg-gray-800"
+            class="h-11 px-4 py-2 border border-info rounded-md text-sm font-medium  hover:bg-gray-800"
             aria-label="Submit Form"
             id="submitButton"
             type="submit"
