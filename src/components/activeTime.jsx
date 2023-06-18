@@ -18,7 +18,11 @@ const Time = () => {
     const dateFormatter = new Intl.DateTimeFormat(undefined, options);
     const date = dateFormatter.format(dateTime);
 
-    const timeOptions = { hour: 'numeric', minute: 'numeric', second: 'numeric' };
+    const timeOptions = {
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric',
+    };
     const timeFormatter = new Intl.DateTimeFormat(undefined, timeOptions);
     const time = timeFormatter.format(dateTime);
 
@@ -26,7 +30,7 @@ const Time = () => {
   };
 
   return (
-    <div class="text-center mt-2">
+    <div class='text-center mt-2'>
       <h2>{formatDateTime(currentTime())}</h2>
     </div>
   );

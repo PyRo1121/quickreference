@@ -12,6 +12,7 @@
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
+    "format": "prettier --write \"src/**/*.jsx\"",
     "todo": "node scrape-todos.js",
     "clean": "rimraf dist node_modules || pnpm store prune"
   },
@@ -29,6 +30,7 @@
     "fs": "0.0.1-security",
     "path": "^0.12.7",
     "postcss": "^8.4.24",
+    "prettier": "^2.8.8",
     "rimraf": "^5.0.1",
     "tailwindcss": "^3.3.2",
     "typescript": "*",

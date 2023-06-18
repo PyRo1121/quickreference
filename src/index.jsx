@@ -6,11 +6,16 @@ import App from './App';
 const root = document.getElementById('root');
 
 if (!root) {
-  throw new Error('Root element not found. Did you forget to add it to your index.html?');
+  throw new Error(
+    'Root element not found. Did you forget to add it to your index.html?'
+  );
 }
 
-render(() => (
-  <Router>
-    <App />
-  </Router>
-), root);
+render(
+  () => (
+    <Router>
+      <App />
+    </Router>
+  ),
+  root
+);
