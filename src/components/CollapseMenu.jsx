@@ -1,58 +1,56 @@
-import { createSignal, onCleanup, onMount } from 'solid-js';
+import { createSignal, onCleanup, onMount, createEffect } from 'solid-js';
+import { createStore } from 'solid-js/store';
 
 const CollapseTable = () => {
-  const [isWeeklySlaOpen, setWeeklySlaOpen] = createSignal(false);
-  const [isContactsOpen, setContactsOpen] = createSignal(false);
-  const [zIndex, setZIndex] = createSignal(0);
-
-  const updateZIndex = () => {
-    setZIndex(isWeeklySlaOpen() || isContactsOpen() ? 10 : 0);
-  };
-
-  onMount(() => {
-    // Event listener functions to toggle the collapse states
-    const toggleWeeklySla = () => setWeeklySlaOpen(!isWeeklySlaOpen());
-    const toggleContacts = () => setContactsOpen(!isContactsOpen());
-
-    // Add event listeners to the respective collapse titles
-    document
-      .querySelector('.collapse-title.weekly-sla')
-      .addEventListener('click', toggleWeeklySla);
-    document
-      .querySelector('.collapse-title.contacts')
-      .addEventListener('click', toggleContacts);
-
-    // Cleanup function to remove event listeners when component unmounts
-    onCleanup(() => {
-      document
-        .querySelector('.collapse-title.weekly-sla')
-        .removeEventListener('click', toggleWeeklySla);
-      document
-        .querySelector('.collapse-title.contacts')
-        .removeEventListener('click', toggleContacts);
-    });
+  const [state, setState] = createStore({
+    isWeeklySlaOpen: false,
+    isContactsOpen: false,
   });
 
-  // Update the zIndex value
-  updateZIndex();
+  const toggleWeeklySla = () =>
+    setState('isWeeklySlaOpen', (prev) => !prev);
+  const toggleContacts = () => setState('isContactsOpen', (prev) => !prev);
+
+  onMount(() => {
+    const handleClick = (event) => {
+      const isWeeklySlaTitle = event.target.closest('.collapse-title.weekly-sla');
+      const isContactsTitle = event.target.closest('.collapse-title.contacts');
+
+      // Check if the click occurred on the top portion of the table
+      const isWeeklySlaTable = event.target.closest('.collapse-table.weekly-sla');
+      const isContactsTable = event.target.closest('.collapse-table.contacts');
+
+      if (isWeeklySlaTitle && !isWeeklySlaTable) {
+        toggleWeeklySla();
+      } else if (isContactsTitle && !isContactsTable) {
+        toggleContacts();
+      }
+    };
+
+    document.addEventListener('click', handleClick);
+
+    onCleanup(() => {
+      document.removeEventListener('click', handleClick);
+    });
+  });
 
   return (
     <div class="flex flex-col space-y-4">
       <div
         tabIndex="0"
-        class={`flex flex-col collapse collapse-arrow border border-base-300 bg-base-200 relative ${zIndex()}`}
+        class={`flex flex-col collapse collapse-arrow border border-base-300 bg-base-200`}
       >
         {/* Weekly SLA */}
         <div class="collapse-title text-xl font-medium p-4 weekly-sla">
           Weekly SLA's
         </div>
-        {isWeeklySlaOpen() && (
-          <div class="collapse-content p-4">
+        {state.isWeeklySlaOpen && (
+          <div class="collapse-content p-4 weekly-sla">
             <table class="table table-striped w-full">
               <thead>
                 <tr>
-                  <th>Type</th>
-                  <th class="text-center">Business Days</th>
+                  <th class="font-bold text-lg text-white">Type</th>
+                  <th class="font-bold text-lg text-white text-center">Business Days</th>
                 </tr>
               </thead>
               <tbody>
@@ -108,19 +106,19 @@ const CollapseTable = () => {
 
       <div
         tabIndex="0"
-        class={`flex flex-col collapse collapse-arrow border border-base-300 bg-base-200 relative ${zIndex()}`}
+        class={`flex flex-col collapse collapse-arrow border border-base-300 bg-base-200`}
       >
         {/* Contacts */}
         <div class="collapse-title text-xl font-medium p-4 contacts">
           Contacts
         </div>
-        {isContactsOpen() && (
-          <div class="collapse-content p-4">
+        {state.isContactsOpen && (
+          <div class="collapse-content p-4 contacts">
             <table class="table table-striped w-full">
               <thead>
                 <tr>
-                  <th>Area</th>
-                  <th>Phone Number</th>
+                  <th class="font-bold text-lg text-white">Area</th>
+                  <th class="font-bold text-lg text-white">Phone Number</th>
                 </tr>
               </thead>
               <tbody>

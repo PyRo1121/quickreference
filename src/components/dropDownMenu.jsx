@@ -1,36 +1,24 @@
-import { createSignal, createEffect } from 'solid-js';
-// TODO: Fix menu to not derender contents of CollapseTable when dropDown is clicked
+import { createSignal, onCleanup } from 'solid-js';
+
 const DropdownMenu = () => {
   const [isOpen, setIsOpen] = createSignal(false);
+
+  const handleToggle = () => {
+    setIsOpen(!isOpen());
+  };
 
   const handleMouseEnter = () => {
     setIsOpen(true);
   };
 
-  const handleMouseLeave = () => {
+  // Cleanup function to set isOpen to false on component unmount
+  onCleanup(() => {
     setIsOpen(false);
-  };
-
-  createEffect(() => {
-    const dropdownContent = document.querySelector('.dropdown-content');
-    if (dropdownContent) {
-      dropdownContent.style.zIndex = isOpen() ? 9999 : 'auto';
-    }
   });
 
   return (
-    <div
-      class="dropdown"
-      style={{ position: 'relative' }}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
-      <button
-        class="btn-ghost btn-circle btn"
-        aria-expanded={isOpen()}
-        aria-haspopup="true"
-        onClick={() => setIsOpen(!isOpen())}
-      >
+    <div class="dropdown z-50" onMouseEnter={handleMouseEnter}>
+      <button class="btn-ghost btn-circle btn" aria-expanded={isOpen()} onClick={handleToggle}>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path
             stroke-linecap="round"
@@ -41,53 +29,53 @@ const DropdownMenu = () => {
         </svg>
       </button>
       {isOpen() && (
-        <ul
+        <div
           class="dropdown-content menu rounded-box w-52 bg-base-100 p-2 shadow"
-          role="menu"
           onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
         >
-          <li>
-            <a class="link1" href="/" role="menuitem">
-              Home
-            </a>
-          </li>
-          <li>
-            <a class="link1" target="_blank" href="/results" role="menuitem">
-              Calls
-            </a>
-          </li>
-          <li>
-            <a class="link1" target="_blank" href="" role="menuitem">
-              Redeem Rewards
-            </a>
-          </li>
-          <li>
-            <a class="link1" target="_blank" href="" role="menuitem">
-              CAPTURE Records
-            </a>
-          </li>
-          <li>
-            <a class="link1" target="_blank" href="" role="menuitem">
-              Credit Card Statements
-            </a>
-          </li>
-          <li>
-            <a class="link1" target="_blank" href="" role="menuitem">
-              A Place to be heard
-            </a>
-          </li>
-          <li>
-            <a class="link1" target="_blank" href="" role="menuitem">
-              Solution Center
-            </a>
-          </li>
-          <li>
-            <a class="link1" target="_blank" href="" role="menuitem">
-              DMP
-            </a>
-          </li>
-        </ul>
+          <ul>
+            <li>
+              <a class="link1" href="/" role="menuitem">
+                Home
+              </a>
+            </li>
+            <li>
+              <a class="link1" target="_blank" href="/results" role="menuitem">
+                Calls
+              </a>
+            </li>
+            <li>
+              <a class="link1" target="_blank" href="" role="menuitem">
+                Redeem Rewards
+              </a>
+            </li>
+            <li>
+              <a class="link1" target="_blank" href="" role="menuitem">
+                CAPTURE Records
+              </a>
+            </li>
+            <li>
+              <a class="link1" target="_blank" href="" role="menuitem">
+                Credit Card Statements
+              </a>
+            </li>
+            <li>
+              <a class="link1" target="_blank" href="" role="menuitem">
+                A Place to be heard
+              </a>
+            </li>
+            <li>
+              <a class="link1" target="_blank" href="" role="menuitem">
+                Solution Center
+              </a>
+            </li>
+            <li>
+              <a class="link1" target="_blank" href="" role="menuitem">
+                DMP
+              </a>
+            </li>
+          </ul>
+        </div>
       )}
     </div>
   );

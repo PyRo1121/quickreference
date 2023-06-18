@@ -6,6 +6,11 @@ const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
+const handleCollapseTableToggle = () => {
+  setCollapseTableIsOpen(!collapseTableIsOpen());
+};
+
+
 const Modal = ({ id, title, content, onModalToggle }) => {
   const [isOpen, setIsOpen] = createSignal(false);
 
@@ -45,6 +50,11 @@ const HomePage = () => {
   const [referenceNumber, setReferenceNumber] = createSignal('');
   const [notes, setNotes] = createSignal(`1. Authentication Notes:\n2. Review Reward Guidelines:\n3. Applicable Disclosures Read:\n4. Complaint Number (If Applicable):\n5. Other Case Details:`);
   const [modalTitles, setModalTitles] = createSignal([]);
+
+  // Create separate signals for each modal
+  const [modal0Open, setModal0Open] = createSignal(false);
+  const [modal1Open, setModal1Open] = createSignal(false);
+  const [modal2Open, setModal2Open] = createSignal(false);
 
   const handleCopyNotes = async () => {
     const notesTextarea = document.getElementById('notesTextarea');
@@ -162,7 +172,6 @@ const HomePage = () => {
       setModalTitles([...modalTitles(), title]);
     }
 
-
     handleCheckboxChange(); // Update the notes when a modal is toggled
   };
 
@@ -216,7 +225,7 @@ const HomePage = () => {
           onModalToggle={handleModalToggle}
         />
       </div>
-      <CollapseTable />
+      <CollapseTable isOpen={collapseTableIsOpen()} onToggle={handleCollapseTableToggle} />
       <form onSubmit={handleSubmit} id="quickForm">
         {/* Caller Name */}
         <div class="flex flex-row space-x-2 h-11 my-2">

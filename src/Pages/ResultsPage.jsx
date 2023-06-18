@@ -80,22 +80,22 @@ const ResultsTable = () => {
         <table className="w-full table-auto">
           <thead>
             <tr>
-              <th className="px-4 py-2 whitespace-nowrap">Caller Name</th>
-              <th className="px-4 py-2 whitespace-nowrap">Decedent's Name</th>
-              <th className="px-4 py-2 whitespace-nowrap">Party ID</th>
-              <th className="px-4 py-2 whitespace-nowrap">Reference Number</th>
-              <th className="px-4 py-2 whitespace-nowrap">Notes</th>
-              <th className="px-4 py-2 whitespace-nowrap">Actions</th>
+              <th className="px-4 py-2 whitespace-nowrap text-white text-left">Caller Name</th>
+              <th className="px-4 py-2 whitespace-nowrap text-white text-left">Decedent's Name</th>
+              <th className="px-4 py-2 whitespace-nowrap text-white text-left">Party ID</th>
+              <th className="px-4 py-2 whitespace-nowrap text-white text-left">Reference Number</th>
+              <th className="px-4 py-2 whitespace-nowrap text-white text-left">Notes</th>
+              <th className="px-4 py-2 whitespace-nowrap text-white text-center">Actions</th>
             </tr>
           </thead>
           <tbody>
             {formRecords().map((record, index) => (
               <tr key={record.id} className={`${index % 2 === 0 ? 'bg-gray-800' : 'bg-gray-900'}`}>
-                <td className="px-4 py-2 whitespace-nowrap">{record.caller_name}</td>
-                <td className="px-4 py-2 whitespace-nowrap">{record.decedents_name}</td>
-                <td className="px-4 py-2 whitespace-nowrap">{record.party_id}</td>
-                <td className="px-4 py-2 whitespace-nowrap">{record.reference_number}</td>
-                <td className="px-4 py-2 max-w-[20rem] whitespace-pre-wrap overflow-auto break-words">
+                <td className="px-4 py-2 whitespace-nowrap text-white">{record.caller_name}</td>
+                <td className="px-4 py-2 whitespace-nowrap text-white">{record.decedents_name}</td>
+                <td className="px-4 py-2 whitespace-nowrap text-white">{record.party_id}</td>
+                <td className="px-4 py-2 whitespace-nowrap text-white">{record.reference_number}</td>
+                <td className="px-4 py-2 max-w-[20rem] whitespace-pre-wrap overflow-auto break-words text-white">
                   {record.notes}
                 </td>
                 <td className="px-4 py-2 whitespace-nowrap space-x-5 flex justify-center">
