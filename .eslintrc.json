@@ -17,6 +17,7 @@
     "solid/no-destructure": "warn",
     "solid/jsx-no-undef": "error",
     "no-unused-vars": "warn",
+    "no-undef": "off",
     "eqeqeq": "warn",
     "curly": "warn",
     "semi": ["warn", "always"],
