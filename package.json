@@ -45,6 +45,7 @@
     "postcss-preset-env": "^8.5.0",
     "solid-app-router": "^0.4.2",
     "solid-js": "^1.7.6",
+    "terser": "^5.18.0",
     "turbo": "^1.10.3"
   }
 }
