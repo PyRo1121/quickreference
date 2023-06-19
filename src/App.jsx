@@ -15,7 +15,7 @@ const App = () => {
           <Time />
         </div>
       </div>
-      <div class='divider'></div>
+      <div class='divider' />
       <Routes>
         <Route path='/' element={<HomePage />} end />
         <Route path='/results' element={<ResultsPage />} />

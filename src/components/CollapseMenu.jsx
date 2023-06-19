@@ -1,4 +1,4 @@
-import { createSignal, onCleanup, onMount, createEffect } from 'solid-js';
+import { onCleanup, onMount } from 'solid-js';
 import { createStore } from 'solid-js/store';
 
 const CollapseTable = () => {

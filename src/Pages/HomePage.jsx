@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { createSignal, onCleanup } from 'solid-js';
 import { createClient } from '@supabase/supabase-js';
 import CollapseTable from '../components/CollapseMenu';
@@ -10,39 +11,35 @@ const handleCollapseTableToggle = () => {
   setCollapseTableIsOpen(!collapseTableIsOpen());
 };
 
-const Modal = ({ id, title, content, onModalToggle }) => {
+const Modal = (props) => {
   const [isOpen, setIsOpen] = createSignal(false);
 
-  const closeModal = () => {
-    setIsOpen(false);
-  };
-
   const handleToggle = () => {
-    onModalToggle(title, isOpen());
+    props.onModalToggle(props.title, isOpen());
     setIsOpen(!isOpen());
   };
 
   return (
     <>
       <label
-        for={id}
+        for={props.id}
         class='h-11 px-4 py-2 border border-info rounded-md text-sm font-medium  hover:bg-gray-800 cursor-pointer'
       >
-        {title}
+        {props.title}
       </label>
       <input
         type='checkbox'
-        id={id}
+        id={props.id}
         class='modal-toggle'
         onChange={handleToggle}
       />
       <div class={`modal ${isOpen() ? 'open' : ''}`}>
         <div class='modal-box'>
-          <h5 class='text-center select-all '>{title}</h5>
-          <div class='divider'></div>
-          <div class=''>{content}</div>
+          <h5 class='text-center select-all '>{props.title}</h5>
+          <div class='divider' />
+          <div class=''>{props.content}</div>
           <div class='modal-action'>
-            <label for={id} class='btn'>
+            <label for={props.id} class='btn'>
               Close
             </label>
           </div>
@@ -62,31 +59,14 @@ const HomePage = () => {
   );
   const [modalTitles, setModalTitles] = createSignal([]);
 
-  // Create separate signals for each modal
-  const [modal0Open, setModal0Open] = createSignal(false);
-  const [modal1Open, setModal1Open] = createSignal(false);
-  const [modal2Open, setModal2Open] = createSignal(false);
-
   const handleCopyNotes = async () => {
-    const [notes, setNotes] = createSignal(
-      `1. Authentication Notes:\n2. Review Reward Guidelines:\n3. Applicable Disclosures Read:\n4. Complaint Number (If Applicable):\n5. Other Case Details:`
-    );
+    const notesValue = notes();
 
-    // Server-side rendering
-    if (typeof window === 'undefined') {
-      try {
-        const { data, error } = await supabase
-          .from('clipboard')
-          .insert([{ notes: notes() }]);
-
-        if (error) {
-          console.error('Failed to copy notes to clipboard:', error);
-        } else {
-          console.log('Notes copied to clipboard:', data);
-        }
-      } catch (error) {
-        console.error('Error copying notes to clipboard:', error);
-      }
+    try {
+      await navigator.clipboard.writeText(notesValue);
+      console.log('Notes copied to clipboard:', notesValue);
+    } catch (error) {
+      console.error('Error copying notes:', error);
     }
   };
 
@@ -352,7 +332,7 @@ const HomePage = () => {
             rows='5'
             value={notes()}
             onInput={(event) => setNotes(event.target.value)}
-          ></textarea>
+          />
         </div>
 
         {/* Form Buttons */}

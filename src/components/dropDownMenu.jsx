@@ -3,10 +3,6 @@ import { createSignal, onCleanup } from 'solid-js';
 const DropdownMenu = () => {
   const [isOpen, setIsOpen] = createSignal(false);
 
-  const handleToggle = () => {
-    setIsOpen(!isOpen());
-  };
-
   const handleMouseEnter = () => {
     setIsOpen(true);
   };
