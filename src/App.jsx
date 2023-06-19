@@ -3,6 +3,7 @@ import HomePage from './Pages/HomePage';
 import ResultsPage from './Pages/ResultsPage';
 import Time from './components/activeTime';
 import DropdownMenu from './components/dropDownMenu';
+import { Toaster } from 'solid-toast';
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
         <div class='flex items-center'>
           {/* Dropdown Menu */}
           <DropdownMenu />
+          <Toaster />
         </div>
         <div class='flex flex-grow justify-center'>
           {/* Active Time */}

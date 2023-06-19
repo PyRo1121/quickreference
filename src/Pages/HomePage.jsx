@@ -2,6 +2,8 @@
 import { createSignal, onCleanup } from 'solid-js';
 import { createClient } from '@supabase/supabase-js';
 import CollapseTable from '../components/CollapseMenu';
+import toast, { Toaster } from 'solid-toast';
+const notify = () => toast.success('Call Record Saved.');
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
@@ -348,9 +350,11 @@ const HomePage = () => {
             aria-label='Submit Form'
             id='submitButton'
             type='submit'
+            onClick={notify}
           >
             Submit
           </button>
+          <Toaster />
         </div>
       </form>
     </div>
