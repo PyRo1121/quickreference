@@ -35,9 +35,7 @@ const ResultsTable = () => {
     if (error) {
       console.error('Error deleting record:', error);
     } else {
-      const updatedRecords = formRecords().filter(
-        (record) => record.id !== recordId
-      );
+      const updatedRecords = formRecords().filter((record) => record.id !== recordId);
       setFormRecords(updatedRecords);
       supabase.from('form').upsert(updatedRecords);
     }
@@ -45,11 +43,7 @@ const ResultsTable = () => {
 
   const editRecord = async (record) => {
     try {
-      const { data, error } = await supabase
-        .from('form')
-        .select('*')
-        .eq('id', record.id)
-        .single();
+      const { data, error } = await supabase.from('form').select('*').eq('id', record.id).single();
 
       if (error) {
         console.error('Error fetching record:', error);
@@ -68,10 +62,7 @@ const ResultsTable = () => {
   };
 
   const updateRecord = async (updatedRecord) => {
-    const { error } = await supabase
-      .from('form')
-      .update(updatedRecord)
-      .eq('id', updatedRecord.id);
+    const { error } = await supabase.from('form').update(updatedRecord).eq('id', updatedRecord.id);
     if (error) {
       console.error('Error updating record:', error);
     } else {
@@ -91,38 +82,22 @@ const ResultsTable = () => {
         <table class='w-full table-auto'>
           <thead>
             <tr>
-              <th class='px-4 py-2 whitespace-nowrap    text-left'>
-                Caller Name
-              </th>
-              <th class='px-4 py-2 whitespace-nowrap    text-left'>
-                Decedent's Name
-              </th>
+              <th class='px-4 py-2 whitespace-nowrap    text-left'>Caller Name</th>
+              <th class='px-4 py-2 whitespace-nowrap    text-left'>Decedent's Name</th>
               <th class='px-4 py-2 whitespace-nowrap    text-left'>Party ID</th>
-              <th class='px-4 py-2 whitespace-nowrap    text-left'>
-                Reference Number
-              </th>
+              <th class='px-4 py-2 whitespace-nowrap    text-left'>Reference Number</th>
               <th class='px-4 py-2 whitespace-nowrap    text-left'>Notes</th>
-              <th class='px-4 py-2 whitespace-nowrap    text-center'>
-                Actions
-              </th>
+              <th class='px-4 py-2 whitespace-nowrap    text-center'>Actions</th>
             </tr>
           </thead>
           <tbody>
             <For each={formRecords()}>
               {(record, index) => (
-                <tr
-                  class={`${index() % 2 === 0 ? 'bg-gray-800' : 'bg-gray-900'}`}
-                >
-                  <td class='px-4 py-2 whitespace-nowrap'>
-                    {record.caller_name}
-                  </td>
-                  <td class='px-4 py-2 whitespace-nowrap'>
-                    {record.decedents_name}
-                  </td>
+                <tr class={`${index() % 2 === 0 ? 'bg-gray-800' : 'bg-gray-900'}`}>
+                  <td class='px-4 py-2 whitespace-nowrap'>{record.caller_name}</td>
+                  <td class='px-4 py-2 whitespace-nowrap'>{record.decedents_name}</td>
                   <td class='px-4 py-2 whitespace-nowrap'>{record.party_id}</td>
-                  <td class='px-4 py-2 whitespace-nowrap'>
-                    {record.reference_number}
-                  </td>
+                  <td class='px-4 py-2 whitespace-nowrap'>{record.reference_number}</td>
                   <td class='px-4 py-2 max-w-[20rem] whitespace-pre-wrap overflow-auto break-words'>
                     {record.notes}
                   </td>

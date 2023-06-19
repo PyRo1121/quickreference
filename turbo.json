@@ -2,12 +2,15 @@
   "$schema": "https://turborepo.org/schema.json",
   "pipeline": {
     "build": {
+      "inputs": ["src/**/*.js"],
       "outputs": ["dist/**"]
     },
     "lint": {
+      "inputs": ["src/**/*.js"],
       "outputs": []
     },
     "typecheck": {
+      "inputs": ["src/**/*.js", "src/**/*.ts"],
       "outputs": []
     },
     "dev": {
@@ -18,6 +21,14 @@
     "build": {
       "command": "pnpm build",
       "public": "./dist"
+    },
+    "lint": {
+      "command": "pnpm lint",
+      "dependsOn": ["build"]
+    },
+    "test": {
+      "command": "pnpm test",
+      "dependsOn": ["build"]
     }
   },
   "globalEnv": ["PORT", "NODE_ENV"]

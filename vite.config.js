@@ -9,18 +9,23 @@ export default defineConfig({
   },
   build: {
     target: 'esnext',
-    minify: true,
-    commonjsOptions: {
-      // Options for optimizing CommonJS output
-      ignoreDynamicRequires: true,
-      transformMixedEsModules: true,
+    minify: 'terser', // Use terser for minification
+    cssCodeSplit: true, // Enable CSS extraction
+    rollupOptions: {
+      treeshake: true, // Enable tree shaking
+      output: {
+        manualChunks: undefined, // Allow rollup to automatically split chunks
+      },
     },
-    esbuildOptions: {
-      // Options for optimizing ES modules output
-      target: 'es2015',
-    },
+    brotliSize: true, // Enable Brotli compression
+    chunkSizeWarningLimit: 2000, // Increase the chunk size warning limit if needed
   },
   optimizeDeps: {
-    dynamicImport: true,
+    include: ['solid-js'], // Include specific dependencies for optimization
+    exclude: [], // Exclude specific dependencies from optimization
+    link: 'esm', // Use ECMAScript modules for linked dependencies
+    allowNodeBuiltins: false, // Do not include Node.js built-ins in the bundle
   },
+  mode: 'production', // Enable production mode optimizations
 });
+

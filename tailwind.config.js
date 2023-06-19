@@ -1,12 +1,23 @@
+/* eslint-disable no-undef */
 module.exports = {
-  content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
-    "./src/**/*.{html,js,jsx,ts,tsx}", // Add this line to include HTML files for purging
-  ],
+  mode: 'jit',
+  purge: {
+    mode: 'all',
+    content: ['./src/**/*.{js,jsx,ts,tsx}'],
+    safelist: [],
+  },
+  darkMode: 'class',
   theme: {
     extend: {},
   },
-  plugins: [
-    require("daisyui"),
-  ],
+  variants: {
+    extend: {},
+  },
+  plugins: [require('daisyui')],
+  daisyui: {
+    styled: true,
+    themes: true,
+    base: true,
+  },
 };
+

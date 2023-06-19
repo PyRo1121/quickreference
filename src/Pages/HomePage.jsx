@@ -23,19 +23,14 @@ const Modal = (props) => {
     <>
       <label
         for={props.id}
-        class='h-11 px-4 py-2 border border-info rounded-md text-sm font-medium  hover:bg-gray-800 cursor-pointer'
+        class='h-11 px-4 py-2 border border-info rounded-md text-sm font-medium hover:bg-gray-800 cursor-pointer'
       >
         {props.title}
       </label>
-      <input
-        type='checkbox'
-        id={props.id}
-        class='modal-toggle'
-        onChange={handleToggle}
-      />
+      <input type='checkbox' id={props.id} class='modal-toggle' onChange={handleToggle} />
       <div class={`modal ${isOpen() ? 'open' : ''}`}>
         <div class='modal-box'>
-          <h5 class='text-center select-all '>{props.title}</h5>
+          <h5 class='text-center select-all'>{props.title}</h5>
           <div class='divider' />
           <div class=''>{props.content}</div>
           <div class='modal-action'>
@@ -134,7 +129,6 @@ const HomePage = () => {
     }
   };
 
-  // Define the event listener function
   const handleCheckboxChange = () => {
     const applicableDisclosuresRead = '3. Applicable Disclosures Read:';
     const lines = notes().split('\n');
@@ -155,17 +149,10 @@ const HomePage = () => {
     }
 
     const modalTitlesString = modalTitles().join('; ');
-    lines[
-      applicableDisclosuresLineIndex
-    ] = `${applicableDisclosuresRead} ${modalTitlesString}`;
+    lines[applicableDisclosuresLineIndex] = `${applicableDisclosuresRead} ${modalTitlesString}`;
 
     setNotes(lines.join('\n'));
   };
-
-  // Add the event listener on component mount
-  onCleanup(() => {
-    document.removeEventListener('change', handleCheckboxChange);
-  });
 
   const handleModalToggle = (title, isOpen) => {
     if (isOpen) {
@@ -181,16 +168,21 @@ const HomePage = () => {
     handleCheckboxChange(); // Update the notes when a modal is toggled
   };
 
+  // Add the event listener on component mount
+  onCleanup(() => {
+    document.removeEventListener('change', handleCheckboxChange);
+  });
+
   return (
-    <div>
+    <div class='w-98'>
       <div class='flex flex-row space-x-2 h-11 my-2 justify-center mb-4'>
         <Modal
           id='my-modal-0'
           title='Non-Liable Disclosure'
           content={
-            <p>
-              &emsp; Please be advised that we are requesting payment from the
-              assets of the decedent’s Estate and not you individually.
+            <p class='text-sm'>
+              &emsp; Please be advised that we are requesting payment from the assets of the
+              decedent’s Estate and not you individually.
             </p>
           }
           onModalToggle={handleModalToggle}
@@ -200,26 +192,24 @@ const HomePage = () => {
           title='Reward Points Disclosure'
           content={
             <>
-              <ul class='p-0'>
-                &emsp;To redeem rewards, certain conditions must be met and
-                restrictions apply. Redemption depends on the final status of
-                the account, is subject to the account being closed and paid in
-                full, and is in our sole discretion.
+              <ul class='text-sm'>
+                &emsp;To redeem rewards, certain conditions must be met and restrictions apply.
+                Redemption depends on the final status of the account, is subject to the account
+                being closed and paid in full, and is in our sole discretion.
               </ul>
               <br />
-              <ul class='p-0'>
-                &emsp; Rewards redemption must be requested. If the account is
-                not paid in full at the time of the request, you as the
-                authorized representative of the estate must state that the
-                remaining account balance will be paid in full, and redemption
-                will not occur until such payment is made. Redemption and
-                payment of the remaining account balance must occur within 57
-                calendar days of [date that account changed to deceased status].
+              <ul class='text-sm'>
+                &emsp; Rewards redemption must be requested. If the account is not paid in full at
+                the time of the request, you as the authorized representative of the estate must
+                state that the remaining account balance will be paid in full, and redemption will
+                not occur until such payment is made. Redemption and payment of the remaining
+                account balance must occur within 57 calendar days of [date that account changed to
+                deceased status].
               </ul>
               <br />
-              <ul class='p-0'>
-                &emsp; Do you intend to pay the remaining balance with assets of
-                the estate to redeem rewards?
+              <ul class='text-sm'>
+                &emsp; Do you intend to pay the remaining balance with assets of the estate to
+                redeem rewards?
               </ul>
             </>
           }
@@ -230,27 +220,23 @@ const HomePage = () => {
           title='Refund Disclosure'
           content={
             <>
-              <ul class='p-0'>
-                &emsp; Once the requested information is received and verified,
-                a refund request is submitted, subject to approval, the refund
-                could take up to ten (10) days before the funds are received.
+              <ul class='text-sm'>
+                &emsp; Once the requested information is received and verified, a refund request is
+                submitted, subject to approval, the refund could take up to ten (10) days before the
+                funds are received.
               </ul>
               <br />
-              <ul class='p-0'>
-                &emsp; Please be advised that if there were any charges made
-                after the date of passing of the account holder(s), those
-                charges may be deducted from the payments received after the
-                date of passing, which may reduce the amount of any refund.
+              <ul class='text-sm'>
+                &emsp; Please be advised that if there were any charges made after the date of
+                passing of the account holder(s), those charges may be deducted from the payments
+                received after the date of passing, which may reduce the amount of any refund.
               </ul>
             </>
           }
           onModalToggle={handleModalToggle}
         />
       </div>
-      <CollapseTable
-        isOpen={collapseTableIsOpen()}
-        onToggle={handleCollapseTableToggle}
-      />
+      <CollapseTable isOpen={collapseTableIsOpen()} onToggle={handleCollapseTableToggle} />
       <form onSubmit={handleSubmit} id='quickForm'>
         {/* Caller Name */}
         <div class='flex flex-row space-x-2 h-11 my-2'>
@@ -338,7 +324,7 @@ const HomePage = () => {
         {/* Form Buttons */}
         <div class='flex flex-row justify-center space-x-2 pt-2'>
           <button
-            class='h-11 px-4 py-2 border border-info rounded-md text-sm font-medium  hover:bg-gray-800'
+            class='h-11 px-4 py-2 border border-info rounded-md text-sm font-medium hover:bg-gray-800'
             type='reset'
             aria-label='Reset Notes'
             id='resetButton'
@@ -347,7 +333,7 @@ const HomePage = () => {
             Reset Notes
           </button>
           <button
-            class='h-11 px-4 py-2 border border-info rounded-md text-sm font-medium  hover:bg-gray-800'
+            class='h-11 px-4 py-2 border border-info rounded-md text-sm font-medium hover:bg-gray-800'
             aria-label='Copy Notes'
             id='copyID'
             value='Copy'
@@ -357,7 +343,7 @@ const HomePage = () => {
             Copy
           </button>
           <button
-            class='h-11 px-4 py-2 border border-info rounded-md text-sm font-medium  hover:bg-gray-800'
+            class='h-11 px-4 py-2 border border-info rounded-md text-sm font-medium hover:bg-gray-800'
             aria-label='Submit Form'
             id='submitButton'
             type='submit'
