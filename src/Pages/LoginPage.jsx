@@ -1,9 +1,5 @@
 import { createSignal } from 'solid-js';
-import { createClient } from '@supabase/supabase-js';
-
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
-const supabase = createClient(supabaseUrl, supabaseKey);
+import { supabase } from '../components/supabaseClient';
 
 export default function LoginPage() {
   const [email, setEmail] = createSignal('');

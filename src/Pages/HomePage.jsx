@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import { createSignal, onCleanup } from 'solid-js';
-import { createClient } from '@supabase/supabase-js';
+import { supabase } from '../components/supabaseClient';
 import CollapseTable from '../components/CollapseMenu';
 import toast, { Toaster } from 'solid-toast';
 const notify = () =>
@@ -12,11 +12,6 @@ const notify = () =>
       'aria-live': 'polite',
     },
   });
-
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
-const supabase = createClient(supabaseUrl, supabaseKey);
-
 const handleCollapseTableToggle = () => {
   setCollapseTableIsOpen(!collapseTableIsOpen());
 };

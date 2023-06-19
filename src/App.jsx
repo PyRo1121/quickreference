@@ -6,13 +6,10 @@ import Time from './components/activeTime';
 import DropdownMenu from './components/dropDownMenu';
 import { Toaster } from 'solid-toast';
 import LoginPage from './Pages/LoginPage';
+import RecoverPasswordPage from './Pages/RecoverPasswordPage';
 import SignUpPage from './Pages/SignUpPage';
 import ForgotPasswordPage from './Pages/ForgotPasswordPage';
-import { createClient } from '@supabase/supabase-js';
-
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
-const supabase = createClient(supabaseUrl, supabaseKey);
+import { supabase } from './components/supabaseClient';
 
 const App = () => {
   const [user, setUser] = createSignal(null);
@@ -27,7 +24,8 @@ const App = () => {
         event === 'SIGNED_OUT' &&
         location.pathname !== '/login' &&
         location.pathname !== '/signup' &&
-        location.pathname !== '/forgotpassword'
+        location.pathname !== '/forgotpassword' &&
+        location.pathname !== '/recover/**'
       ) {
         navigate('/login');
       } else if (event === 'SIGNED_IN' && location.pathname === '/login') {
@@ -74,6 +72,10 @@ const App = () => {
 
         {/* Forgot Password Page */}
         <Route path='/forgotpassword' element={<ForgotPasswordPage />} />
+
+        {/* Redirect to Home Page */}
+
+        <Route path='/recover/:access_token' element={<RecoverPasswordPage />} />
       </Routes>
     </div>
   );
