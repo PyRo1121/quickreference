@@ -3,7 +3,15 @@ import { createSignal, onCleanup } from 'solid-js';
 import { createClient } from '@supabase/supabase-js';
 import CollapseTable from '../components/CollapseMenu';
 import toast, { Toaster } from 'solid-toast';
-const notify = () => toast.success('Call Record Saved.');
+const notify = () =>
+  toast.success('Call Record Saved.', {
+    duration: 3000,
+    position: 'top-center',
+    aria: {
+      role: 'status',
+      'aria-live': 'polite',
+    },
+  });
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
