@@ -31,8 +31,7 @@
       { "Area": "Standard", "Phone Number": "866.337.1189" },
       { "Area": "Reclamations", "Phone Number": "800.820.3057" },
       { "Area": "Unclaimed", "Phone Number": "877.830.4910" },
-      { "Area": "Auto", "Phone Number": "877.243.5796" },
-      { "Area": "Auto(IRA)", "Phone Number": "877.243.5797" }
+      { "Area": "Auto", "Phone Number": "877.243.5796" }
     ]
   }
 ]
