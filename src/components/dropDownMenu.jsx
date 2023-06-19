@@ -25,7 +25,7 @@ const DropdownMenu = () => {
   ];
 
   return (
-    <div class='dropdown z-50' onMouseEnter={handleMouseEnter}>
+    <div class='dropdown relative z-50' onMouseEnter={handleMouseEnter}>
       {/* Toggle Button */}
       <button class='btn-ghost btn-circle btn' aria-expanded={isOpen()} aria-label='Toggle Menu'>
         <svg
@@ -47,7 +47,10 @@ const DropdownMenu = () => {
 
       {/* Dropdown Menu */}
       {isOpen() && (
-        <div class='dropdown-content menu rounded-box w-52 bg-base-100 p-2 shadow' role='menu'>
+        <div
+          class='dropdown-content menu absolute right-0 mt-2 w-52 bg-base-100 p-2 shadow'
+          role='menu'
+        >
           <ul role='presentation'>
             {/* Menu Items */}
             <For each={menuItems}>
