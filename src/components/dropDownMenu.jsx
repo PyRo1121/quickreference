@@ -26,8 +26,16 @@ const DropdownMenu = () => {
 
   return (
     <div class='dropdown z-50' onMouseEnter={handleMouseEnter}>
-      <button class='btn-ghost btn-circle btn' aria-expanded={isOpen()}>
-        <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='white'>
+      {/* Toggle Button */}
+      <button class='btn-ghost btn-circle btn' aria-expanded={isOpen()} aria-label='Toggle Menu'>
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          fill='none'
+          viewBox='0 0 24 24'
+          stroke='white'
+          role='img'
+        >
+          <title>Toggle Menu</title>
           <path
             stroke-linecap='round'
             stroke-linejoin='round'
@@ -36,13 +44,16 @@ const DropdownMenu = () => {
           />
         </svg>
       </button>
+
+      {/* Dropdown Menu */}
       {isOpen() && (
-        <div class='dropdown-content menu rounded-box w-52 bg-base-100 p-2 shadow'>
-          <ul>
+        <div class='dropdown-content menu rounded-box w-52 bg-base-100 p-2 shadow' role='menu'>
+          <ul role='presentation'>
+            {/* Menu Items */}
             <For each={menuItems}>
               {(item) => (
-                <li>
-                  <a class='menu-item' href={item.href}>
+                <li role='none'>
+                  <a class='menu-item' href={item.href} role='menuitem'>
                     {item.label}
                   </a>
                 </li>

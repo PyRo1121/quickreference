@@ -30,13 +30,29 @@ const CollapseTable = () => {
           <div
             tabIndex='0'
             class={`flex flex-col collapse collapse-arrow border border-base-300 bg-base-200`}
+            role='region'
+            aria-expanded={state()[type]}
           >
-            <div class={`collapse-title text-xl font-medium p-4`} data-type={type}>
+            {/* Collapse Title */}
+            <div
+              class={`collapse-title text-xl font-medium p-4`}
+              data-type={type}
+              role='button'
+              aria-label='Toggle Collapse'
+              tabIndex='0'
+              onKeyPress={(e) => {
+                if (e.key === 'Enter') {
+                  toggle(type);
+                }
+              }}
+            >
               {title}
             </div>
+
+            {/* Collapse Content */}
             {state()[type] && (
               <div class={`collapse-content p-4`}>
-                <table class='table table-striped w-full'>
+                <table class='table table-striped w-full' role='table'>
                   <thead>
                     <tr>
                       <For each={Object.keys(rows[0])}>

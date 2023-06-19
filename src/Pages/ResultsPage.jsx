@@ -77,28 +77,53 @@ const ResultsTable = () => {
 
   return (
     <div class='overflow-x-auto'>
-      <h1 class='text-2xl font-bold mb-4 text-center   '>Call Notes</h1>
+      <h1 class='text-2xl font-bold mb-4 text-center' tabIndex='0'>
+        Call Notes
+      </h1>
       <div class='max-w-full'>
-        <table class='w-full table-auto'>
+        <table class='w-full table-auto' role='table'>
           <thead>
             <tr>
-              <th class='px-4 py-2 whitespace-nowrap    text-left'>Caller Name</th>
-              <th class='px-4 py-2 whitespace-nowrap    text-left'>Decedent's Name</th>
-              <th class='px-4 py-2 whitespace-nowrap    text-left'>Party ID</th>
-              <th class='px-4 py-2 whitespace-nowrap    text-left'>Reference Number</th>
-              <th class='px-4 py-2 whitespace-nowrap    text-left'>Notes</th>
-              <th class='px-4 py-2 whitespace-nowrap    text-center'>Actions</th>
+              <th class='px-4 py-2 whitespace-nowrap text-left' scope='col' tabIndex='0'>
+                Caller Name
+              </th>
+              <th class='px-4 py-2 whitespace-nowrap text-left' scope='col' tabIndex='0'>
+                Decedent's Name
+              </th>
+              <th class='px-4 py-2 whitespace-nowrap text-left' scope='col' tabIndex='0'>
+                Party ID
+              </th>
+              <th class='px-4 py-2 whitespace-nowrap text-left' scope='col' tabIndex='0'>
+                Reference Number
+              </th>
+              <th class='px-4 py-2 whitespace-nowrap text-left' scope='col' tabIndex='0'>
+                Notes
+              </th>
+              <th class='px-4 py-2 whitespace-nowrap text-center' scope='col' tabIndex='0'>
+                Actions
+              </th>
             </tr>
           </thead>
           <tbody>
             <For each={formRecords()}>
               {(record, index) => (
                 <tr class={`${index() % 2 === 0 ? 'bg-gray-800' : 'bg-gray-900'}`}>
-                  <td class='px-4 py-2 whitespace-nowrap'>{record.caller_name}</td>
-                  <td class='px-4 py-2 whitespace-nowrap'>{record.decedents_name}</td>
-                  <td class='px-4 py-2 whitespace-nowrap'>{record.party_id}</td>
-                  <td class='px-4 py-2 whitespace-nowrap'>{record.reference_number}</td>
-                  <td class='px-4 py-2 max-w-[20rem] whitespace-pre-wrap overflow-auto break-words'>
+                  <td class='px-4 py-2 whitespace-nowrap' tabIndex='0'>
+                    {record.caller_name}
+                  </td>
+                  <td class='px-4 py-2 whitespace-nowrap' tabIndex='0'>
+                    {record.decedents_name}
+                  </td>
+                  <td class='px-4 py-2 whitespace-nowrap' tabIndex='0'>
+                    {record.party_id}
+                  </td>
+                  <td class='px-4 py-2 whitespace-nowrap' tabIndex='0'>
+                    {record.reference_number}
+                  </td>
+                  <td
+                    class='px-4 py-2 max-w-[20rem] whitespace-pre-wrap overflow-auto break-words'
+                    tabIndex='0'
+                  >
                     {record.notes}
                   </td>
                   <td class='px-4 py-2 whitespace-nowrap'>
@@ -125,9 +150,15 @@ const ResultsTable = () => {
       </div>
 
       {isModalOpen() && selectedRecord() !== null && (
-        <div class='fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-md'>
+        <div
+          class='fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-md'
+          role='dialog'
+          aria-modal='true'
+        >
           <div class='w-96 p-4 mx-auto bg-gray-800 rounded shadow'>
-            <h2 class='text-2xl font-bold mb-4   '>Edit Record</h2>
+            <h2 class='text-2xl font-bold mb-4' tabIndex='0'>
+              Edit Record
+            </h2>
             <form
               onSubmit={(e) => {
                 e.preventDefault();
@@ -143,11 +174,11 @@ const ResultsTable = () => {
               }}
             >
               <div class='mb-4'>
-                <label class='block mb-2   ' for='callerName'>
+                <label class='block mb-2' for='callerName' tabIndex='0'>
                   Caller Name:
                 </label>
                 <input
-                  class='w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-indigo-500   '
+                  class='w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-indigo-500'
                   type='text'
                   id='callerName'
                   value={selectedRecord().caller_name}
@@ -160,11 +191,11 @@ const ResultsTable = () => {
                 />
               </div>
               <div class='mb-4'>
-                <label class='block mb-2   ' for='decedentsName'>
+                <label class='block mb-2' for='decedentsName' tabIndex='0'>
                   Decedent's Name:
                 </label>
                 <input
-                  class='w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-indigo-500   '
+                  class='w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-indigo-500'
                   type='text'
                   id='decedentsName'
                   value={selectedRecord().decedents_name}
@@ -177,11 +208,11 @@ const ResultsTable = () => {
                 />
               </div>
               <div class='mb-4'>
-                <label class='block mb-2   ' for='partyId'>
+                <label class='block mb-2' for='partyId' tabIndex='0'>
                   Party ID:
                 </label>
                 <input
-                  class='w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-indigo-500   '
+                  class='w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-indigo-500'
                   type='text'
                   id='partyId'
                   value={selectedRecord().party_id}
@@ -194,11 +225,11 @@ const ResultsTable = () => {
                 />
               </div>
               <div class='mb-4'>
-                <label class='block mb-2   ' for='referenceNumber'>
+                <label class='block mb-2' for='referenceNumber' tabIndex='0'>
                   Reference Number:
                 </label>
                 <input
-                  class='w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-indigo-500   '
+                  class='w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-indigo-500'
                   type='text'
                   id='referenceNumber'
                   value={selectedRecord().reference_number}
@@ -211,11 +242,11 @@ const ResultsTable = () => {
                 />
               </div>
               <div class='mb-4'>
-                <label class='block mb-2   ' for='notes'>
+                <label class='block mb-2' for='notes' tabIndex='0'>
                   Notes:
                 </label>
                 <textarea
-                  class='w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-indigo-500    h-40'
+                  class='w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-indigo-500 h-40'
                   id='notes'
                   value={selectedRecord().notes}
                   onInput={(e) =>
@@ -228,14 +259,14 @@ const ResultsTable = () => {
               </div>
               <div class='flex justify-between items-center'>
                 <button
-                  class='px-4 py-2 border border-info rounded-md text-sm font-medium   '
+                  class='px-4 py-2 border border-info rounded-md text-sm font-medium'
                   type='button'
                   onClick={closeModal}
                 >
                   Close
                 </button>
                 <button
-                  class='px-4 py-2 border border-info rounded-md text-sm font-medium   '
+                  class='px-4 py-2 border border-info rounded-md text-sm font-medium'
                   type='submit'
                 >
                   Save

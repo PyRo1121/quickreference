@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import { createSignal, onCleanup } from 'solid-js';
 import { createClient } from '@supabase/supabase-js';
 import CollapseTable from '../components/CollapseMenu';
@@ -31,7 +30,7 @@ const Modal = (props) => {
       <div class={`modal ${isOpen() ? 'open' : ''}`}>
         <div class='modal-box'>
           <h5 class='text-center select-all'>{props.title}</h5>
-          <div class='divider' />
+          <div class='divider' aria-hidden='true' />
           <div class=''>{props.content}</div>
           <div class='modal-action'>
             <label for={props.id} class='btn'>
@@ -175,7 +174,8 @@ const HomePage = () => {
 
   return (
     <div class='w-98'>
-      <div class='flex flex-row space-x-2 h-11 my-2 justify-center mb-4'>
+      {/* Modal Buttons */}
+      <div class='flex flex-row space-x-2 h-11 my-2 justify-center mb-4' role='toolbar'>
         <Modal
           id='my-modal-0'
           title='Non-Liable Disclosure'
@@ -312,8 +312,8 @@ const HomePage = () => {
             class='align-left form-control w-full resize-none overflow-hidden rounded-md border border-info bg-transparent pl-2'
             id='notesTextarea'
             aria-label='Notes'
-            autocapitalize='on'
-            spellcheck='true'
+            autoCapitalize='on'
+            spellCheck='true'
             name='notes'
             rows='5'
             value={notes()}
