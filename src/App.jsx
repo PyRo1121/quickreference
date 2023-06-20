@@ -4,6 +4,7 @@ import ResultsPage from './Pages/ResultsPage';
 import Time from './components/activeTime';
 import DropdownMenu from './components/dropDownMenu';
 import { Toaster } from 'solid-toast';
+import NotFoundPage from './Pages/404';
 
 const App = () => {
   return (
@@ -31,6 +32,7 @@ const App = () => {
 
         {/* Results Page */}
         <Route path='/results' element={<ResultsPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>
   );

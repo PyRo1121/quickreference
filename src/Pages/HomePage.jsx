@@ -38,7 +38,7 @@ const Modal = (props) => {
         <div class='modal-box'>
           <h5 class='text-center select-all'>{props.title}</h5>
           <div class='divider' aria-hidden='true' />
-          <div class=''>{props.content}</div>
+          <div class='modal-content break-words'>{props.content}</div>
           <div class='modal-action'>
             <label for={props.id} class='btn'>
               Close
