@@ -1,5 +1,6 @@
 import { createSignal, createEffect, onCleanup, For } from 'solid-js';
 import { supabase } from '../components/supabaseClient';
+import toast, { Toaster } from 'solid-toast';
 
 const ResultsTable = () => {
   const [formRecords, setFormRecords] = createSignal([]);
@@ -34,6 +35,14 @@ const ResultsTable = () => {
       const updatedRecords = formRecords().filter((record) => record.id !== recordId);
       setFormRecords(updatedRecords);
       supabase.from('form').upsert(updatedRecords);
+      toast.success('Call Record Deleted.', {
+        duration: 3000,
+        position: 'top-center',
+        aria: {
+          role: 'status',
+          'aria-live': 'polite',
+        },
+      });
     }
   };
 
@@ -75,6 +84,7 @@ const ResultsTable = () => {
     <div class='overflow-x-auto'>
       <h1 class='text-2xl font-bold mb-4 text-center' tabIndex='0'>
         Call Notes
+        <Toaster />
       </h1>
       <div class='max-w-full'>
         <table class='w-full table-auto' role='table'>
