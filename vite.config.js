@@ -11,28 +11,24 @@ export default defineConfig({
     assetsDir: 'assets',
     emptyOutDir: true,
     manifest: true,
-    sourcemap: false, // Disabling sourcemaps for production
-    terserOptions: {
-      compress: {
-        drop_console: true,
-      },
-    },
+    sourcemap: false,
+    minify: 'terser', // Use Terser for minification
     rollupOptions: {
       input: {
         main: './index.html',
       },
       output: {
-        entryFileNames: '[name].[hash].js', // Adding hash to the output file names for cache busting
+        entryFileNames: '[name].[hash].js',
         chunkFileNames: '[name].[hash].js',
         assetFileNames: '[name].[hash].[ext]',
       },
     },
-    chunkSizeWarningLimit: 500, // Adjusting the chunk size warning limit based on your application's needs
+    chunkSizeWarningLimit: 500,
   },
   optimizeDeps: {
-    include: ['solid-js', 'solid-js/web'], // Explicitly include SolidJS and its web runtime to optimize dependencies
+    include: ['solid-js', 'solid-js/web'],
   },
   esbuild: {
-    jsxInject: `import { createSignal, Show, lazy } from 'solid-js';`, // Injecting SolidJS imports for ESBuild optimization
+    jsxInject: `import { createSignal, Show, lazy } from 'solid-js';`,
   },
 });
