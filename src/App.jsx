@@ -10,17 +10,17 @@ const App = () => {
   const [currentRoute] = createSignal(window.location.pathname);
 
   return (
-    <div class='w-95 m-2 flex flex-col'>
+    <div class="w-95 m-2 flex flex-col">
       {/* Header */}
-      <div class='flex justify-between items-center' role='banner'>
-        <div class='flex items-center'>
+      <div class="flex justify-between items-center" role="banner">
+        <div class="flex items-center">
           {/* Dropdown Menu */}
           <Show when={currentRoute() === '/' || currentRoute() === '/results'}>
             <DropdownMenu />
           </Show>
           <Toaster />
         </div>
-        <div class='flex flex-grow justify-center'>
+        <div class="flex flex-grow justify-center">
           {/* Active Time */}
           <Show when={currentRoute() === '/' || currentRoute() === '/results'}>
             <Time />
@@ -30,7 +30,7 @@ const App = () => {
 
       {/* Divider */}
       <Show when={currentRoute() === '/' || currentRoute() === '/results'}>
-        <div class='divider' role='separator' />
+        <div class="divider" role="separator" />
       </Show>
 
       {/* Render Page */}

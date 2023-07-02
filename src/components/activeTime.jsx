@@ -30,7 +30,7 @@ const Time = () => {
   });
 
   return (
-    <div class='text-center mt-2'>
+    <div class="text-center mt-2">
       <h2>{formatDateTime(currentTime())}</h2>
     </div>
   );

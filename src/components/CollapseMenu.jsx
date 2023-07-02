@@ -48,15 +48,15 @@ const CollapseTable = () => {
   ];
 
   return (
-    <div class='flex flex-col space-y-4'>
+    <div class="flex flex-col space-y-4">
       <For each={data}>
         {({ title, type, rows }) => (
           <div
-            tabIndex='0'
+            tabIndex="0"
             class={`flex flex-col collapse collapse-arrow border border-base-300 bg-base-200 ${
               state()[type] ? 'open' : ''
             }`}
-            role='region'
+            role="region"
             aria-expanded={state()[type]}
             onClick={() => handleToggle(type)}
             onKeyPress={(e) => {
@@ -68,8 +68,8 @@ const CollapseTable = () => {
             {/* Collapse Title */}
             <div
               class={`collapse-title text-xl font-medium p-4`}
-              role='button'
-              aria-label='Toggle Collapse'
+              role="button"
+              aria-label="Toggle Collapse"
             >
               {title}
             </div>
@@ -77,11 +77,11 @@ const CollapseTable = () => {
             {/* Collapse Content */}
             {state()[type] && (
               <div class={`collapse-content p-4`}>
-                <table class='table table-striped w-full' role='table'>
+                <table class="table table-striped w-full" role="table">
                   <thead>
                     <tr>
                       <For each={Object.keys(rows[0])}>
-                        {(key) => <th class='font-bold text-lg text-white'>{key}</th>}
+                        {(key) => <th class="font-bold text-lg text-white">{key}</th>}
                       </For>
                     </tr>
                   </thead>
@@ -90,7 +90,7 @@ const CollapseTable = () => {
                       {(row) => (
                         <tr>
                           <For each={Object.values(row)}>
-                            {(value) => <td class='select-all'>{value}</td>}
+                            {(value) => <td class="select-all">{value}</td>}
                           </For>
                         </tr>
                       )}
