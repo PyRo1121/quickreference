@@ -4,9 +4,12 @@
     "es2021": true
   },
   "plugins": ["solid"],
-  "extends": ["eslint:recommended", "plugin:solid/recommended"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:solid/recommended"
+  ],
   "parserOptions": {
-    "ecmaVersion": "latest",
+    "ecmaVersion": 2021,
     "sourceType": "module",
     "ecmaFeatures": {
       "jsx": true
@@ -17,7 +20,6 @@
     "solid/no-destructure": "warn",
     "solid/jsx-no-undef": "error",
     "no-unused-vars": "warn",
-    "no-undef": "off",
     "eqeqeq": "warn",
     "curly": "warn",
     "semi": ["warn", "always"],
