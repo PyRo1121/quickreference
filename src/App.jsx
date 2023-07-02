@@ -1,13 +1,22 @@
-import { createSignal, Show } from 'solid-js';
-import HomePage from './Pages/HomePage';
-import ResultsPage from './Pages/ResultsPage';
-import Time from './components/activeTime';
-import DropdownMenu from './components/dropDownMenu';
+import { createSignal, Show, lazy } from 'solid-js';
 import { Toaster } from 'solid-toast';
+import { useRoutes } from '@solidjs/router';
+
 import NotFoundPage from './Pages/404';
+
+const HomePage = lazy(() => import('./Pages/HomePage'));
+const ResultsPage = lazy(() => import('./Pages/ResultsPage'));
+const Time = lazy(() => import('./components/activeTime'));
+const DropdownMenu = lazy(() => import('./components/dropDownMenu'));
 
 const App = () => {
   const [currentRoute] = createSignal(window.location.pathname);
+
+  const routeResult = useRoutes(() => [
+    { path: '/', element: <HomePage /> },
+    { path: '/results', element: <ResultsPage /> },
+    { path: '/', element: <NotFoundPage /> },
+  ]);
 
   return (
     <div class="w-95 m-2 flex flex-col">
@@ -34,20 +43,7 @@ const App = () => {
       </Show>
 
       {/* Render Page */}
-      <Show when={true}>
-        <Show when={currentRoute() === '/'}>
-          <HomePage />
-        </Show>
-        <Show when={currentRoute() === '/results'}>
-          <>
-            <Toaster />
-            <ResultsPage />
-          </>
-        </Show>
-        <Show when={currentRoute() !== '/' && currentRoute() !== '/results'}>
-          <NotFoundPage />
-        </Show>
-      </Show>
+      {routeResult}
     </div>
   );
 };
