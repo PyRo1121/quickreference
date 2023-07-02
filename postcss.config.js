@@ -5,12 +5,11 @@ module.exports = {
     tailwindcss: {},
     'postcss-preset-env': {
       stage: 0, // Enable all modern CSS features
-      autoprefixer: { grid: true }, // Enable grid prefixes
+      autoprefixer: { 
+        grid: true, // Enable grid prefixes
+        overrideBrowserslist: ['> 1%', 'last 2 versions'], // Support browsers with more than 1% market share and the last 2 versions of each browser
+      },
     },
     'postcss-nested': {},
-    autoprefixer: {
-      overrideBrowserslist: ['> 1%', 'last 2 versions'], // A sample configuration for autoprefixer
-    },
   },
 };
-

@@ -1,8 +1,9 @@
 /* eslint-disable no-undef */
-import { createSignal, onCleanup } from 'solid-js';
+import { createSignal, onCleanup, createEffect } from 'solid-js';
 import { supabase } from '../components/supabaseClient';
 import CollapseTable from '../components/CollapseMenu';
 import toast, { Toaster } from 'solid-toast';
+
 const notify = () =>
   toast.success('Call Record Saved.', {
     duration: 3000,
@@ -49,6 +50,7 @@ const Modal = (props) => {
     </>
   );
 };
+
 
 const HomePage = () => {
   const [callerName, setCallerName] = createSignal('');
@@ -100,7 +102,7 @@ const HomePage = () => {
       console.log('Form data saved:', data);
     }
 
-    // Reset form fields
+    // Reset form fields```jsx
     setCallerName('');
     setDecedentsName('');
     setPartyId('');
@@ -109,12 +111,6 @@ const HomePage = () => {
       `1. Authentication Notes:\n2. Review Reward Guidelines:\n3. Applicable Disclosures Read:\n4. Complaint Number (If Applicable):\n5. Other Case Details:`
     );
     setModalTitles([]); // Clear the modal titles
-
-    // Reset the notes field by its element ID
-    const notesTextarea = document.getElementById('notesTextarea');
-    if (notesTextarea) {
-      notesTextarea.textContent = `1. Authentication Notes:\n2. Review Reward Guidelines:\n3. Applicable Disclosures Read:\n4. Complaint Number (If Applicable):\n5. Other Case Details:`;
-    }
   };
 
   const handleReset = () => {
@@ -127,15 +123,18 @@ const HomePage = () => {
       `1. Authentication Notes:\n2. Review Reward Guidelines:\n3. Applicable Disclosures Read:\n4. Complaint Number (If Applicable):\n5. Other Case Details:`
     );
     setModalTitles([]); // Clear the modal titles
+  };
 
-    // Reset the notes field by its element ID
-    const notesTextarea = document.getElementById('notesTextarea');
-    if (notesTextarea) {
-      notesTextarea.textContent = `1. Authentication Notes:\n2. Review Reward Guidelines:\n3. Applicable Disclosures Read:\n4. Complaint Number (If Applicable):\n5. Other Case Details:`;
+  const handleModalToggle = (title, isOpen) => {
+    if (!isOpen) {
+      // Modal is being opened, add the title to the modalTitles state if it doesn't already exist
+      if (!modalTitles().includes(title)) {
+        setModalTitles([...modalTitles(), title]);
+      }
     }
   };
 
-  const handleCheckboxChange = () => {
+  createEffect(() => {
     const applicableDisclosuresRead = '3. Applicable Disclosures Read:';
     const lines = notes().split('\n');
     let applicableDisclosuresLineIndex = -1;
@@ -158,21 +157,7 @@ const HomePage = () => {
     lines[applicableDisclosuresLineIndex] = `${applicableDisclosuresRead} ${modalTitlesString}`;
 
     setNotes(lines.join('\n'));
-  };
-
-  const handleModalToggle = (title, isOpen) => {
-    if (isOpen) {
-      // Modal is being closed, do not remove the title from the modalTitles state
-      return;
-    }
-
-    // Modal is being opened, add the title to the modalTitles state if it doesn't already exist
-    if (!modalTitles().includes(title)) {
-      setModalTitles([...modalTitles(), title]);
-    }
-
-    handleCheckboxChange(); // Update the notes when a modal is toggled
-  };
+  });
 
   // Add the event listener on component mount
   onCleanup(() => {
@@ -209,7 +194,8 @@ const HomePage = () => {
                 &emsp; Rewards redemption must be requested. If the account is not paid in full at
                 the time of the request, you as the authorized representative of the estate must
                 state that the remaining account balance will be paid in full, and redemption will
-                not occur until such payment is made. Redemption and payment of the remaining
+                not occur until such```jsx
+                payment is made. Redemption and payment of the remaining
                 account balance must occur within 57 calendar days of [date that account changed to
                 deceased status].
               </ul>
@@ -304,7 +290,8 @@ const HomePage = () => {
             class='form-control w-screen rounded-md border border-info bg-transparent pl-3'
             placeholder='Reference/Case #'
             id='reference'
-            aria-label='Reference/Case Number'
+            aria-label='Reference/```jsx
+Case Number'
             value={referenceNumber()}
             onInput={(event) => setReferenceNumber(event.target.value)}
           />

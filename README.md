@@ -1,34 +1,51 @@
+# Quick Reference
+
+This is a CRUD app with additional useful information and automated tasks to help in day-to-day job activities.
+
+## Getting Started
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+
+### Prerequisites
+
+- Node.js
+- pnpm
+
+### Installation
+
+1. Clone the repo
+2. git clone https://github.com/PyRo1121/quick-reference.git
+3. pnpm install
+
 ## Usage
 
-Those templates dependencies are maintained via [pnpm](https://pnpm.io) via `pnpm up -Lri`.
+There are several scripts defined in `package.json` that help with development:
 
-This is the reason you see a `pnpm-lock.yaml`. That being said, any package manager will work. This file can be safely be removed once you clone a template.
+- `pnpm start`: Starts the application using `node index.js`.
+- `pnpm run dev`: Starts the development server using Vite.
+- `pnpm run lint`: Lints the source files using ESLint and automatically fixes any fixable issues.
+- `pnpm run build`: Builds the application for production using Vite.
+- `pnpm run serve`: Serves the built application for previewing the production build.
+- `pnpm run format`: Formats the source files using Prettier.
+- `pnpm run todo`: Runs a custom script (`scrape-todos.js`) that presumably scrapes TODO comments from the code.
+- `pnpm run clean`: Deletes the `dist` and `node_modules` directories and prunes the ppnpm store.
 
-```bash
-$ npm install # or pnpm install or yarn install
-```
+## Contributing
 
-### Learn more on the [Solid Website](https://solidjs.com) and come chat with us on our [Discord](https://discord.com/invite/solidjs)
+Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are greatly appreciated.
 
-## Available Scripts
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-In the project directory, you can run:
+## License
 
-### `npm run dev` or `npm start`
+Distributed under the MIT License. See `LICENSE` for more information.
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Contact
 
-The page will reload if you make edits.<br>
+Olen Latham - olen@latham.cloud
 
-### `npm run build`
-
-Builds the app for production to the `dist` folder.<br>
-It correctly bundles Solid in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-## Deployment
-
-You can deploy the `dist` folder to any static host provider (netlify, surge, now, etc.)
+Project Link: [https://github.com/PyRo1121/quick-reference](https://github.com/PyRo1121/quick-reference)

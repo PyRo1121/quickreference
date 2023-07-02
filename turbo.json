@@ -2,18 +2,21 @@
   "$schema": "https://turborepo.org/schema.json",
   "pipeline": {
     "build": {
-      "inputs": ["src/**/*.js"],
+      "inputs": ["src/**/*.jsx", "src/**/*.js"],
       "outputs": ["dist/**"]
     },
     "lint": {
-      "inputs": ["src/**/*.js"],
+      "inputs": ["src/**/*.jsx", "src/**/*.js"],
       "outputs": []
     },
-    "typecheck": {
-      "inputs": ["src/**/*.js", "src/**/*.ts"],
+    "format": {
+      "inputs": ["src/**/*.jsx"],
       "outputs": []
     },
     "dev": {
+      "cache": false
+    },
+    "clean": {
       "cache": false
     }
   },
@@ -26,9 +29,17 @@
       "command": "pnpm lint",
       "dependsOn": ["build"]
     },
-    "test": {
-      "command": "pnpm test",
-      "dependsOn": ["build"]
+    "format": {
+      "command": "pnpm format",
+      "dependsOn": []
+    },
+    "dev": {
+      "command": "pnpm dev",
+      "dependsOn": []
+    },
+    "clean": {
+      "command": "pnpm clean",
+      "dependsOn": []
     }
   },
   "globalEnv": ["PORT", "NODE_ENV"]
